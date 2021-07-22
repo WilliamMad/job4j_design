@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SimpleArray<T> implements Iterable<T> {
-    private Object[] container;
+    private T[] container;
     private int size;
 
     public void add(T model) {
@@ -28,23 +28,25 @@ public class SimpleArray<T> implements Iterable<T> {
 
     public T get(int index) {
         Objects.checkIndex(index, size);
-        return (T) container[index];
+        return container[index];
     }
 
     @Override
     public Iterator<T> iterator() {
-        return (Iterator<T>) new Iterator<Object>() {
+        return new Iterator<T>() {
+            private int current = 0;
+
             @Override
             public boolean hasNext() {
-                return container.length < size;
+                return current < size;
             }
 
             @Override
-            public Object next() {
+            public T next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return container[size++];
+                return container[current++];
             }
         };
     }
