@@ -23,9 +23,4 @@ public class UserStore implements Store<User> {
     public User findById(String id) {
         return store.findById(id);
     }
-
-    @Override
-    public int findByIndexById(String id) {
-        return store.findByIndexById(id);
-    }
 }
