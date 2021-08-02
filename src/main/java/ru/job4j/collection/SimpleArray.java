@@ -12,12 +12,14 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public T get(int index) {
-        Objects.checkIndex(index, container.length);
+        Objects.checkIndex(index, size);
         return (T) container[index];
     }
 
     public void add(T model) {
-        Objects.checkIndex(size, container.length);
+        if (size == container.length) {
+            container = Arrays.copyOf(container, container.length + 1);
+        }
         container[size++] = model;
         modCount++;
     }
